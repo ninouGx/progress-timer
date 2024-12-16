@@ -47,7 +47,7 @@ pub fn time_function<F, T>(name: &str, threshold: Duration, update_interval: Dur
     let duration = start.elapsed();
 
     let _ = progress_thread.join();
-    println!("\r✅ {} completed in {:?}    ", name, duration);
+    println!("\r✅ {} completed in {:?}    ", name, format_duration(duration));
 
     result
 }
