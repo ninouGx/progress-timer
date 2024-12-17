@@ -1,6 +1,6 @@
 [package]
 name = "progress_timer"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 authors = ["nin0ux"]
 description = "A simple progress timer utility for Rust"

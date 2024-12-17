@@ -7,8 +7,9 @@ use std::io::{ Write, stdout };
 fn format_duration(duration: Duration) -> String {
     let total_secs = duration.as_secs();
     let millis = duration.subsec_millis();
-
-    if total_secs < 60 {
+    if total_secs < 1 {
+        format!("{:?}", duration)
+    } else if total_secs < 60 {
         format!("{}.{:03}s", total_secs, millis)
     } else if total_secs < 3600 {
         let minutes = total_secs / 60;
@@ -47,7 +48,7 @@ pub fn time_function<F, T>(name: &str, threshold: Duration, update_interval: Dur
     let duration = start.elapsed();
 
     let _ = progress_thread.join();
-    println!("\r✅ {} completed in {:?}    ", name, format_duration(duration));
+    println!("\r✅ {} completed in {}    ", name, format_duration(duration));
 
     result
 }
@@ -61,6 +62,15 @@ mod tests {
     fn test_timer() {
         let result = time_function("Test", Duration::from_secs(1), Duration::from_millis(500), || {
             sleep(Duration::from_secs(3));
+            42
+        });
+        assert_eq!(result, 42);
+    }
+
+    #[test]
+    fn test_format_less_a_sec() {
+        let result = time_function("Test", Duration::from_secs(1), Duration::from_millis(500), || {
+            sleep(Duration::from_nanos(500));
             42
         });
         assert_eq!(result, 42);
