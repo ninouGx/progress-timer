@@ -15,7 +15,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-progress_timer = { git = "https://github.com/ninouGx/progress_timer" }
+progress_timer = { git = "https://github.com/ninouGx/progress-timer" }
 ```
 
 ## Usage
